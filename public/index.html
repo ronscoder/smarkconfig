@@ -4,9 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+    <title>Welcome to Smark Config</title>
 
-    <!-- update the version number as needed -->
     <script defer src="/__/firebase/9.6.6/firebase-app-compat.js"></script>
     <!-- include only the Firebase features as you need -->
     <script defer src="/__/firebase/9.6.6/firebase-auth-compat.js"></script>
@@ -28,14 +27,14 @@
         body {
             background: #ECEFF1;
             color: rgba(0, 0, 0, 0.87);
-            font-family: Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Courier New', Courier, monospace;
             margin: 0;
             padding: 0;
         }
 
         #message {
             background: white;
-            max-width: 360px;
+            max-width: 660px;
             margin: 100px auto 16px;
             padding: 32px 24px;
             border-radius: 3px;
@@ -82,6 +81,10 @@
             text-align: center;
             font-size: 13px;
         }
+        div {
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
 
         @media (max-width: 600px) {
 
@@ -96,61 +99,195 @@
                 border-top: 16px solid #ffa100;
             }
         }
+        #OPTION_MD{
+            width: 44px;
+        }
+        span{
+            border: 1px solid;
+            padding: 4px;
+        }
     </style>
 </head>
 
 <body>
     <div id="message">
-        <p>HOLD_EXE:
-            <span id='hold_exe'></span>
-        </p>
-        <button id='toggle'>Toggle</button>
+        <div>
+            <label>Stop exe</label>
+            <button id='hold_exe'>Loading</button>
+        </div>
+        <br>
+        <div>
+            <label>Strike range</label>
+            <div>
+                <input id="strike1" type="number">
+                <input id="strike2" type="number">
+                <button id="btnstrike">Update strike range</button>
+            </div>
+        </div>
+        <div>
+            <label>Option range</label>
+            <div>
+                <input id="option1" type="number">
+                <input id="option2" type="number">
+                <button id="btnOption">Update option range</button>
+            </div>
+        </div>
+        <div>
+            <div>
+                <label>OPTION_MD</label> <span id="OPTION_MD"></span>
+            </div>
+            <input id="MD_UPDATE">
+            <button id="BTN_OPTION_MD_REMOVE">Remove</button>
+            <button id="BTN_OPTION_MD_ADD">Add</button>
+        </div>
+        <div>
+            <label>OPEN_ORDER_EXPIRY_MIN</label>
+            <input id="OPEN_ORDER_EXPIRY_MIN" type="number">
+            <button id="BTN_OPEN_ORDER_EXPIRY_MIN">update</button>
+        </div>
+        <div>
+            <label>ENTRY_STOP_PC</label>
+            <input id="ENTRY_STOP_PC" type="number">
+            <button id="BTN_ENTRY_STOP_PC">update</button>
+        </div>
+        <div>
+            <label>STOP_PC</label>
+            <input id="STOP_PC" type="number">
+            <button id="BTN_STOP_PC">update</button>
+        </div>
+        <div>
+            <label>TRAIL_PC</label>
+            <input id="TRAIL_PC" type="number">
+            <button id="BTN_TRAIL_PC">update</button>
+        </div>
+        <div>
+            <label>TRAIL_BUFFER_PC</label>
+            <input id="TRAIL_BUFFER_PC" type="number">
+            <button id="BTN_TRAIL_BUFFER_PC">update</button>
+        </div>
+        <div>
+            <label>TRIGGER_GAP</label>
+            <input id="TRIGGER_GAP" type="number">
+            <button id="BTN_TRIGGER_GAP">update</button>
+        </div>
+        
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const loadEl = document.querySelector('#load');
-            const output = document.querySelector('#hold_exe')
-            const toggle = document.querySelector('#toggle')
-            // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-            // // The Firebase SDK is initialized and available here!
-            //
-            // firebase.auth().onAuthStateChanged(user => { });
-            // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-            // firebase.firestore().doc('/foo/bar').get().then(() => { });
-            // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-            // firebase.messaging().requestPermission().then(() => { });
-            // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-            // firebase.analytics(); // call to activate
-            // firebase.analytics().logEvent('tutorial_completed');
-            // firebase.performance(); // call to activate
-            //
-            // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+            const btn_hold_exe = document.querySelector('#hold_exe')
+
+            const strike1 = document.querySelector('#strike1')
+            const strike2 = document.querySelector('#strike2')
+            const btnstrike = document.querySelector('#btnstrike')
+
+            const option1 = document.querySelector('#option1')
+            const option2 = document.querySelector('#option2')
+            const btnoption = document.querySelector('#btnOption')
+
+            const el_OPTION_MD = document.querySelector('#OPTION_MD')
+            const IN_OPEN_ORDER_EXPIRY_MIN = document.querySelector('#OPEN_ORDER_EXPIRY_MIN')
+            const BTN_OPEN_ORDER_EXPIRY_MIN = document.querySelector('#BTN_OPEN_ORDER_EXPIRY_MIN')
+
+            const ENTRY_STOP_PC = document.querySelector('#ENTRY_STOP_PC')
+            const BTN_ENTRY_STOP_PC = document.querySelector('#BTN_ENTRY_STOP_PC')
+
+            const STOP_PC = document.querySelector('#STOP_PC')
+            const BTN_STOP_PC = document.querySelector('#BTN_STOP_PC')
+
+            const TRAIL_PC = document.querySelector('#TRAIL_PC')
+            const BTN_TRAIL_PC = document.querySelector('#BTN_TRAIL_PC')
+
+            const TRAIL_BUFFER_PC = document.querySelector('#TRAIL_BUFFER_PC')
+            const BTN_TRAIL_BUFFER_PC = document.querySelector('#BTN_TRAIL_BUFFER_PC')
+
+            const TRIGGER_GAP = document.querySelector('#TRIGGER_GAP')
+            const BTN_TRIGGER_GAP = document.querySelector('#BTN_TRIGGER_GAP')
+
+            const EL_MD_UPDATE = document.querySelector('#MD_UPDATE')
+            const BTN_OPTION_MD_REMOVE = document.querySelector('#BTN_OPTION_MD_REMOVE')
+            const BTN_OPTION_MD_ADD = document.querySelector('#BTN_OPTION_MD_ADD')
 
             try {
                 //   let app = firebase.app();
                 var db = firebase.firestore();
                 var configsRef = db.collection("configs").doc("VIp4hCZGXPOqyJMNDc6H");
                 var hold_exe = null
+                var option_md = null
                 configsRef.onSnapshot((doc) => {
-                        console.log("Current data: ", doc.data());
-                        output.textContent = doc.data()['HOLD_EXE']
-                        hold_exe = doc.data()['HOLD_EXE']
-                    });
+                    data = doc.data()
+                    console.log("Current data: ", data);
+                    hold_exe = data['HOLD_EXE'];
+                    btn_hold_exe.textContent = hold_exe;
+                    strike_range = data['STRIKE_RANGE'];
+                    strike1.value = strike_range[0];
+                    strike2.value = strike_range[1];
 
-                // configsRef.get().then((doc) => {
-                //     if (doc.exists) {
-                //         console.log("Document data:", doc.data());
-                //         output.textContent = doc.data()['HOLD_EXE']
-                //     } else {
-                //         // doc.data() will be undefined in this case
-                //         console.log("No such document!");
-                //     }
-                // }).catch((error) => {
-                //     console.log("Error getting document:", error);
-                // });
-                toggle.onclick = function(){
-                    configsRef.update({HOLD_EXE: !hold_exe})
+                    option_range = data['OPTION_PRICE_RANGE'];
+                    option1.value = option_range[0];
+                    option2.value = option_range[1];
+
+                    option_md = data['OPTION_MD']
+                    el_OPTION_MD.textContent = option_md
+                    IN_OPEN_ORDER_EXPIRY_MIN.value = data['OPEN_ORDER_EXPIRY_MIN'];
+
+                    ENTRY_STOP_PC.value = data['ENTRY_STOP_PC'];
+                    STOP_PC.value = data['STOP_PC'];
+                    TRAIL_PC.value = data['TRAIL_PC'];
+                    TRAIL_BUFFER_PC.value = data['TRAIL_BUFFER_PC'];
+                    TRIGGER_GAP.value = data['TRIGGER_GAP'];
+
+                });
+
+                btn_hold_exe.onclick = function () {
+                    configsRef.update({ HOLD_EXE: !hold_exe })
+                }
+                btnstrike.onclick = function () {
+
+                    configsRef.update({ STRIKE_RANGE: [parseInt(strike1.value), parseInt(strike2.value)] })
+                }
+                btnOption.onclick = function () {
+
+                    configsRef.update({ OPTION_PRICE_RANGE: [parseFloat(option1.value), parseFloat(option2.value)] })
+                }
+                BTN_OPEN_ORDER_EXPIRY_MIN.onclick = function () {
+
+                    configsRef.update({ OPEN_ORDER_EXPIRY_MIN: parseInt(IN_OPEN_ORDER_EXPIRY_MIN.value)})
+                }
+                BTN_ENTRY_STOP_PC.onclick = function () {
+
+                    configsRef.update({ ENTRY_STOP_PC: parseFloat(ENTRY_STOP_PC.value)})
+                }
+
+                BTN_STOP_PC.onclick = function () {
+
+                    configsRef.update({ STOP_PC: parseFloat(STOP_PC.value)})
+                }
+
+                BTN_TRAIL_PC.onclick = function () {
+
+                    configsRef.update({ TRAIL_PC: parseFloat(TRAIL_PC.value)})
+                }
+
+                BTN_TRAIL_BUFFER_PC.onclick = function () {
+
+                    configsRef.update({ TRAIL_BUFFER_PC: parseFloat(TRAIL_BUFFER_PC.value)})
+                }
+                BTN_TRIGGER_GAP.onclick = function () {
+
+                    configsRef.update({ TRIGGER_GAP: parseFloat(TRIGGER_GAP.value)})
+                }
+
+                BTN_OPTION_MD_REMOVE.onclick = function(){
+                    valuetoRemove = EL_MD_UPDATE.value
+                    configsRef.update({OPTION_MD: firebase.firestore.FieldValue.arrayRemove(valuetoRemove)})
+                    EL_MD_UPDATE.value = null
+                }
+                BTN_OPTION_MD_ADD.onclick = function(){
+                    valuetoAdd = EL_MD_UPDATE.value
+                    configsRef.update({OPTION_MD: firebase.firestore.FieldValue.arrayUnion(valuetoAdd)})
+                    EL_MD_UPDATE.value = null
                 }
 
 

@@ -118,6 +118,7 @@
 <body>
     <!-- <label>Hello</label> -->
     <div id="message">
+        <div id="status"></div>
         <div>
             <label>Stop exe</label>
             <button id='hold_exe'>Loading</button>
@@ -215,7 +216,17 @@
             const EL_MD_UPDATE = document.querySelector('#MD_UPDATE')
             const BTN_OPTION_MD_REMOVE = document.querySelector('#BTN_OPTION_MD_REMOVE')
             const BTN_OPTION_MD_ADD = document.querySelector('#BTN_OPTION_MD_ADD')
+            const elstatus = document.querySelector('#status')
 
+            var showStatus = function(){
+                elstatus.textContent = 'Updating...'
+                setTimeout(() => {
+                    elstatus.textContent = 'Updated'
+                    setTimeout(() => {
+                        elstatus.textContent = ''
+                    }, 2000);
+                }, 2000);
+            }
             try {
                 //   let app = firebase.app();
                 var db = firebase.firestore();
@@ -249,52 +260,63 @@
 
                 btn_hold_exe.onclick = function () {
                     configsRef.update({ HOLD_EXE: !hold_exe })
+                    showStatus()
                 }
                 btnstrike.onclick = function () {
 
                     configsRef.update({ STRIKE_RANGE: [parseInt(strike1.value), parseInt(strike2.value)] })
+                    showStatus()
                 }
                 btnOption.onclick = function () {
 
                     configsRef.update({ OPTION_PRICE_RANGE: [parseFloat(option1.value), parseFloat(option2.value)] })
+                    showStatus()
                 }
                 BTN_OPEN_ORDER_EXPIRY_MIN.onclick = function () {
 
                     configsRef.update({ OPEN_ORDER_EXPIRY_MIN: parseInt(IN_OPEN_ORDER_EXPIRY_MIN.value)})
+                    showStatus()
                 }
                 BTN_ENTRY_STOP_PC.onclick = function () {
 
                     configsRef.update({ ENTRY_STOP_PC: parseFloat(ENTRY_STOP_PC.value)})
+                    showStatus()
                 }
 
                 BTN_STOP_PC.onclick = function () {
 
                     configsRef.update({ STOP_PC: parseFloat(STOP_PC.value)})
+                    showStatus()
                 }
 
                 BTN_TRAIL_PC.onclick = function () {
 
                     configsRef.update({ TRAIL_PC: parseFloat(TRAIL_PC.value)})
+                    showStatus()
                 }
 
                 BTN_TRAIL_BUFFER_PC.onclick = function () {
 
                     configsRef.update({ TRAIL_BUFFER_PC: parseFloat(TRAIL_BUFFER_PC.value)})
+                    showStatus()
                 }
                 BTN_TRIGGER_GAP.onclick = function () {
 
                     configsRef.update({ TRIGGER_GAP: parseFloat(TRIGGER_GAP.value)})
+                    showStatus()
                 }
 
                 BTN_OPTION_MD_REMOVE.onclick = function(){
                     valuetoRemove = EL_MD_UPDATE.value
                     configsRef.update({OPTION_MD: firebase.firestore.FieldValue.arrayRemove(valuetoRemove)})
                     EL_MD_UPDATE.value = null
+                    showStatus()
                 }
                 BTN_OPTION_MD_ADD.onclick = function(){
                     valuetoAdd = EL_MD_UPDATE.value
                     configsRef.update({OPTION_MD: firebase.firestore.FieldValue.arrayUnion(valuetoAdd)})
                     EL_MD_UPDATE.value = null
+                    showStatus()
                 }
 
 

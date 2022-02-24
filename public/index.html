@@ -127,8 +127,8 @@
         <div>
             <label>Strike range</label>
             <div>
-                <input id="strike1" type="number">
-                <input id="strike2" type="number">
+                <label>Span</label><input id="strike1" type="number">
+                <label>Skip</label><input id="strike2" type="number">
                 <button id="btnstrike">Update strike range</button>
             </div>
         </div>
@@ -239,8 +239,8 @@
                     hold_exe = data['HOLD_EXE'];
                     btn_hold_exe.textContent = hold_exe;
                     strike_range = data['STRIKE_RANGE'];
-                    strike1.value = strike_range[0];
-                    strike2.value = strike_range[1];
+                    strike1.value = strike_range['SPAN'];
+                    strike2.value = strike_range['SKIP'];
 
                     option_range = data['OPTION_PRICE_RANGE'];
                     option1.value = option_range[0];
@@ -264,7 +264,7 @@
                 }
                 btnstrike.onclick = function () {
 
-                    configsRef.update({ STRIKE_RANGE: [parseInt(strike1.value), parseInt(strike2.value)] })
+                    configsRef.update({ STRIKE_RANGE: {'SPAN':parseInt(strike1.value), 'SKIP':parseInt(strike2.value)} })
                     showStatus()
                 }
                 btnOption.onclick = function () {

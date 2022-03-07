@@ -178,6 +178,11 @@
             <input id="TRIGGER_GAP" type="number">
             <button id="BTN_TRIGGER_GAP">update</button>
         </div>
+        <div>
+            <label>CANDLE_MOMENTUM_PC</label>
+            <input id="CANDLE_MOMENTUM_PC" type="number">
+            <button id="BTN_CANDLE_MOMENTUM_PC">update</button>
+        </div>
         
     </div>
 
@@ -210,14 +215,18 @@
             const TRAIL_BUFFER_PC = document.querySelector('#TRAIL_BUFFER_PC')
             const BTN_TRAIL_BUFFER_PC = document.querySelector('#BTN_TRAIL_BUFFER_PC')
 
+            
             const TRIGGER_GAP = document.querySelector('#TRIGGER_GAP')
             const BTN_TRIGGER_GAP = document.querySelector('#BTN_TRIGGER_GAP')
-
+            
             const EL_MD_UPDATE = document.querySelector('#MD_UPDATE')
             const BTN_OPTION_MD_REMOVE = document.querySelector('#BTN_OPTION_MD_REMOVE')
             const BTN_OPTION_MD_ADD = document.querySelector('#BTN_OPTION_MD_ADD')
             const elstatus = document.querySelector('#status')
-
+            
+            const CANDLE_MOMENTUM_PC = document.querySelector('#CANDLE_MOMENTUM_PC')
+            const BTN_CANDLE_MOMENTUM_PC = document.querySelector('#BTN_CANDLE_MOMENTUM_PC')
+            
             var showStatus = function(){
                 elstatus.textContent = 'Updating...'
                 setTimeout(() => {
@@ -255,6 +264,7 @@
                     TRAIL_PC.value = data['TRAIL_PC'];
                     TRAIL_BUFFER_PC.value = data['TRAIL_BUFFER_PC'];
                     TRIGGER_GAP.value = data['TRIGGER_GAP'];
+                    CANDLE_MOMENTUM_PC.value = data['CANDLE_MOMENTUM_PC'];
 
                 });
 
@@ -303,6 +313,11 @@
                 BTN_TRIGGER_GAP.onclick = function () {
 
                     configsRef.update({ TRIGGER_GAP: parseFloat(TRIGGER_GAP.value)})
+                    showStatus()
+                }
+                BTN_CANDLE_MOMENTUM_PC.onclick = function () {
+
+                    configsRef.update({ CANDLE_MOMENTUM_PC: parseFloat(CANDLE_MOMENTUM_PC.value)})
                     showStatus()
                 }
 

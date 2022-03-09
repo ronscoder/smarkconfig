@@ -81,6 +81,7 @@
             text-align: center;
             font-size: 13px;
         }
+
         div {
             border-top: 1px dotted grey;
             margin-top: 8px;
@@ -100,15 +101,18 @@
                 border-top: 16px solid #ffa100;
             }
         }
-        span{
+
+        span {
             border: 1px solid;
             margin: 4px;
             padding: 2px;
         }
-        input{
+
+        input {
             max-width: 60px;
         }
-        label{
+
+        label {
             font-weight: bold;
             display: block;
         }
@@ -183,7 +187,7 @@
             <input id="CANDLE_MOMENTUM_PC" type="number">
             <button id="BTN_CANDLE_MOMENTUM_PC">update</button>
         </div>
-        
+
     </div>
 
     <script>
@@ -215,19 +219,19 @@
             const TRAIL_BUFFER_PC = document.querySelector('#TRAIL_BUFFER_PC')
             const BTN_TRAIL_BUFFER_PC = document.querySelector('#BTN_TRAIL_BUFFER_PC')
 
-            
+
             const TRIGGER_GAP = document.querySelector('#TRIGGER_GAP')
             const BTN_TRIGGER_GAP = document.querySelector('#BTN_TRIGGER_GAP')
-            
+
             const EL_MD_UPDATE = document.querySelector('#MD_UPDATE')
             const BTN_OPTION_MD_REMOVE = document.querySelector('#BTN_OPTION_MD_REMOVE')
             const BTN_OPTION_MD_ADD = document.querySelector('#BTN_OPTION_MD_ADD')
             const elstatus = document.querySelector('#status')
-            
+
             const CANDLE_MOMENTUM_PC = document.querySelector('#CANDLE_MOMENTUM_PC')
             const BTN_CANDLE_MOMENTUM_PC = document.querySelector('#BTN_CANDLE_MOMENTUM_PC')
-            
-            var showStatus = function(){
+
+            var showStatus = function () {
                 elstatus.textContent = 'Updating...'
                 setTimeout(() => {
                     elstatus.textContent = 'Updated'
@@ -239,6 +243,13 @@
             try {
                 //   let app = firebase.app();
                 var db = firebase.firestore();
+                let params = (new URL(document.location)).searchParams;
+                let request_token = params.get('request_token')
+                console.log(request_token)
+                if (request_token) {
+                    db.collection('configs').doc('access').update({ request_token: request_token })
+                }
+
                 var configsRef = db.collection("configs").doc("VIp4hCZGXPOqyJMNDc6H");
                 var hold_exe = null
                 var option_md = null
@@ -274,7 +285,7 @@
                 }
                 btnstrike.onclick = function () {
 
-                    configsRef.update({ STRIKE_RANGE: {'SPAN':parseInt(strike1.value), 'SKIP':parseInt(strike2.value)} })
+                    configsRef.update({ STRIKE_RANGE: { 'SPAN': parseInt(strike1.value), 'SKIP': parseInt(strike2.value) } })
                     showStatus()
                 }
                 btnOption.onclick = function () {
@@ -284,52 +295,52 @@
                 }
                 BTN_OPEN_ORDER_EXPIRY_MIN.onclick = function () {
 
-                    configsRef.update({ OPEN_ORDER_EXPIRY_MIN: parseInt(IN_OPEN_ORDER_EXPIRY_MIN.value)})
+                    configsRef.update({ OPEN_ORDER_EXPIRY_MIN: parseInt(IN_OPEN_ORDER_EXPIRY_MIN.value) })
                     showStatus()
                 }
                 BTN_ENTRY_STOP_PC.onclick = function () {
 
-                    configsRef.update({ ENTRY_STOP_PC: parseFloat(ENTRY_STOP_PC.value)})
+                    configsRef.update({ ENTRY_STOP_PC: parseFloat(ENTRY_STOP_PC.value) })
                     showStatus()
                 }
 
                 BTN_STOP_PC.onclick = function () {
 
-                    configsRef.update({ STOP_PC: parseFloat(STOP_PC.value)})
+                    configsRef.update({ STOP_PC: parseFloat(STOP_PC.value) })
                     showStatus()
                 }
 
                 BTN_TRAIL_PC.onclick = function () {
 
-                    configsRef.update({ TRAIL_PC: parseFloat(TRAIL_PC.value)})
+                    configsRef.update({ TRAIL_PC: parseFloat(TRAIL_PC.value) })
                     showStatus()
                 }
 
                 BTN_TRAIL_BUFFER_PC.onclick = function () {
 
-                    configsRef.update({ TRAIL_BUFFER_PC: parseFloat(TRAIL_BUFFER_PC.value)})
+                    configsRef.update({ TRAIL_BUFFER_PC: parseFloat(TRAIL_BUFFER_PC.value) })
                     showStatus()
                 }
                 BTN_TRIGGER_GAP.onclick = function () {
 
-                    configsRef.update({ TRIGGER_GAP: parseFloat(TRIGGER_GAP.value)})
+                    configsRef.update({ TRIGGER_GAP: parseFloat(TRIGGER_GAP.value) })
                     showStatus()
                 }
                 BTN_CANDLE_MOMENTUM_PC.onclick = function () {
 
-                    configsRef.update({ CANDLE_MOMENTUM_PC: parseFloat(CANDLE_MOMENTUM_PC.value)})
+                    configsRef.update({ CANDLE_MOMENTUM_PC: parseFloat(CANDLE_MOMENTUM_PC.value) })
                     showStatus()
                 }
 
-                BTN_OPTION_MD_REMOVE.onclick = function(){
+                BTN_OPTION_MD_REMOVE.onclick = function () {
                     valuetoRemove = EL_MD_UPDATE.value
-                    configsRef.update({OPTION_MD: firebase.firestore.FieldValue.arrayRemove(valuetoRemove)})
+                    configsRef.update({ OPTION_MD: firebase.firestore.FieldValue.arrayRemove(valuetoRemove) })
                     EL_MD_UPDATE.value = null
                     showStatus()
                 }
-                BTN_OPTION_MD_ADD.onclick = function(){
+                BTN_OPTION_MD_ADD.onclick = function () {
                     valuetoAdd = EL_MD_UPDATE.value
-                    configsRef.update({OPTION_MD: firebase.firestore.FieldValue.arrayUnion(valuetoAdd)})
+                    configsRef.update({ OPTION_MD: firebase.firestore.FieldValue.arrayUnion(valuetoAdd) })
                     EL_MD_UPDATE.value = null
                     showStatus()
                 }

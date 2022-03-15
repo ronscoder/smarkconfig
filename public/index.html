@@ -211,6 +211,11 @@
             <input id="CANDLE_MOMENTUM_PC" type="number">
             <button id="BTN_CANDLE_MOMENTUM_PC">update</button>
         </div>
+        <div>
+            <label>OHLC_MIN</label>
+            <input id="OHLC_MIN" type="number">
+            <button id="BTN_OHLC_MIN">update</button>
+        </div>
 
     </div>
 
@@ -255,6 +260,9 @@
 
             const CANDLE_MOMENTUM_PC = document.querySelector('#CANDLE_MOMENTUM_PC')
             const BTN_CANDLE_MOMENTUM_PC = document.querySelector('#BTN_CANDLE_MOMENTUM_PC')
+
+            const OHLC_MIN = document.querySelector('#OHLC_MIN')
+            const BTN_OHLC_MIN = document.querySelector('#OHLC_MIN')
 
             const CURRENT_MONTH_ALL = document.querySelector('#CURRENT_MONTH_ALL')
             const CURRENT_MONTH_LOW = document.querySelector('#CURRENT_MONTH_LOW')
@@ -306,7 +314,7 @@
                     CURRENT_WEEK_ALL.checked = data['STRIKES']['CURRENT_WEEK']['ALL']
                     CURRENT_WEEK_LOW.value = data['STRIKES']['CURRENT_WEEK']['LOW']
                     CURRENT_WEEK_HIGH.value = data['STRIKES']['CURRENT_WEEK']['HIGH']
-                    
+
                     NEXT_WEEK_ALL.checked = data['STRIKES']['NEXT_WEEK']['ALL']
                     NEXT_WEEK_LOW.value = data['STRIKES']['NEXT_WEEK']['LOW']
                     NEXT_WEEK_HIGH.value = data['STRIKES']['NEXT_WEEK']['HIGH']
@@ -325,7 +333,7 @@
                     TRAIL_BUFFER_PC.value = data['TRAIL_BUFFER_PC'];
                     TRIGGER_GAP.value = data['TRIGGER_GAP'];
                     CANDLE_MOMENTUM_PC.value = data['CANDLE_MOMENTUM_PC'];
-
+                    OHLC_MIN.value = data['OHLC_MIN'];
                 });
 
                 btn_hold_exe.onclick = function () {
@@ -381,27 +389,32 @@
                     showStatus()
                 }
 
-                CURRENT_MONTH_ALL.onclick = function(){
-                    configsRef.update({"STRIKES.CURRENT_MONTH.ALL":CURRENT_MONTH_ALL.checked})
+                BTN_OHLC_MIN.onclick = function () {
+
+                    configsRef.update({ OHLC_MIN: parseInt(OHLC_MIN.value) })
+                    showStatus()
                 }
-                BTN_CURRENT_MONTH.onclick = function(){
-                    configsRef.update({"STRIKES.CURRENT_MONTH.LOW": parseInt(CURRENT_MONTH_LOW.value), "STRIKES.CURRENT_MONTH.HIGH": parseInt(CURRENT_MONTH_HIGH.value)})
+                CURRENT_MONTH_ALL.onclick = function () {
+                    configsRef.update({ "STRIKES.CURRENT_MONTH.ALL": CURRENT_MONTH_ALL.checked })
+                }
+                BTN_CURRENT_MONTH.onclick = function () {
+                    configsRef.update({ "STRIKES.CURRENT_MONTH.LOW": parseInt(CURRENT_MONTH_LOW.value), "STRIKES.CURRENT_MONTH.HIGH": parseInt(CURRENT_MONTH_HIGH.value) })
                     showStatus()
                 }
 
-                CURRENT_WEEK_ALL.onclick = function(){
-                    configsRef.update({"STRIKES.CURRENT_WEEK.ALL":CURRENT_WEEK_ALL.checked})
+                CURRENT_WEEK_ALL.onclick = function () {
+                    configsRef.update({ "STRIKES.CURRENT_WEEK.ALL": CURRENT_WEEK_ALL.checked })
                 }
-                BTN_CURRENT_WEEK.onclick = function(){
-                    configsRef.update({"STRIKES.CURRENT_WEEK.LOW": parseInt(CURRENT_WEEK_LOW.value), "STRIKES.CURRENT_MONTH.HIGH": parseInt(CURRENT_MONTH_HIGH.value)})
+                BTN_CURRENT_WEEK.onclick = function () {
+                    configsRef.update({ "STRIKES.CURRENT_WEEK.LOW": parseInt(CURRENT_WEEK_LOW.value), "STRIKES.CURRENT_MONTH.HIGH": parseInt(CURRENT_MONTH_HIGH.value) })
                     showStatus()
                 }
 
-                NEXT_WEEK_ALL.onclick = function(){
-                    configsRef.update({"STRIKES.NEXT_WEEK.ALL":NEXT_WEEK_ALL.checked})
+                NEXT_WEEK_ALL.onclick = function () {
+                    configsRef.update({ "STRIKES.NEXT_WEEK.ALL": NEXT_WEEK_ALL.checked })
                 }
-                BTN_NEXT_WEEK.onclick = function(){
-                    configsRef.update({"STRIKES.NEXT_WEEK.LOW": parseInt(NEXT_WEEK_LOW.value), "STRIKES.NEXT_WEEK.HIGH": parseInt(NEXT_WEEK_HIGH.value)})
+                BTN_NEXT_WEEK.onclick = function () {
+                    configsRef.update({ "STRIKES.NEXT_WEEK.LOW": parseInt(NEXT_WEEK_LOW.value), "STRIKES.NEXT_WEEK.HIGH": parseInt(NEXT_WEEK_HIGH.value) })
                     showStatus()
                 }
 

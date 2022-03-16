@@ -220,6 +220,11 @@
             <input id="EXTREMA_ORDER" type="number">
             <button id="BTN_EXTREMA_ORDER">update</button>
         </div>
+        <div>
+            <label>EXTREMA_WINDOW</label>
+            <input id="EXTREMA_WINDOW" type="number">
+            <button id="BTN_EXTREMA_WINDOW">update</button>
+        </div>
 
     </div>
 
@@ -270,6 +275,9 @@
 
             const EXTREMA_ORDER = document.querySelector('#EXTREMA_ORDER')
             const BTN_EXTREMA_ORDER = document.querySelector('#BTN_EXTREMA_ORDER')
+
+            const EXTREMA_WINDOW = document.querySelector('#EXTREMA_WINDOW')
+            const BTN_EXTREMA_WINDOW = document.querySelector('#BTN_EXTREMA_WINDOW')
 
             const CURRENT_MONTH_ALL = document.querySelector('#CURRENT_MONTH_ALL')
             const CURRENT_MONTH_LOW = document.querySelector('#CURRENT_MONTH_LOW')
@@ -342,6 +350,7 @@
                     CANDLE_MOMENTUM_PC.value = data['CANDLE_MOMENTUM_PC'];
                     OHLC_MIN.value = data['OHLC_MIN'];
                     EXTREMA_ORDER.value = data['EXTREMA_ORDER'];
+                    EXTREMA_WINDOW.value = data['EXTREMA_WINDOW'];
                 });
 
                 btn_hold_exe.onclick = function () {
@@ -405,6 +414,12 @@
                 BTN_EXTREMA_ORDER.onclick = function () {
 
                     configsRef.update({ EXTREMA_ORDER: parseInt(EXTREMA_ORDER.value) })
+                    showStatus()
+                }
+
+                BTN_EXTREMA_WINDOW.onclick = function () {
+
+                    configsRef.update({ EXTREMA_WINDOW: parseInt(EXTREMA_WINDOW.value) })
                     showStatus()
                 }
                 CURRENT_MONTH_ALL.onclick = function () {

@@ -216,6 +216,11 @@
             <input id="OHLC_MIN" type="number">
             <button id="BTN_OHLC_MIN">update</button>
         </div>
+        <div>
+            <label>EXTREMA_ORDER</label>
+            <input id="EXTREMA_ORDER" type="number">
+            <button id="BTN_EXTREMA_ORDER">update</button>
+        </div>
 
     </div>
 
@@ -262,7 +267,10 @@
             const BTN_CANDLE_MOMENTUM_PC = document.querySelector('#BTN_CANDLE_MOMENTUM_PC')
 
             const OHLC_MIN = document.querySelector('#OHLC_MIN')
-            const BTN_OHLC_MIN = document.querySelector('#OHLC_MIN')
+            const BTN_OHLC_MIN = document.querySelector('#BTN_OHLC_MIN')
+
+            const EXTREMA_ORDER = document.querySelector('#EXTREMA_ORDER')
+            const BTN_EXTREMA_ORDER = document.querySelector('#BTN_EXTREMA_ORDER')
 
             const CURRENT_MONTH_ALL = document.querySelector('#CURRENT_MONTH_ALL')
             const CURRENT_MONTH_LOW = document.querySelector('#CURRENT_MONTH_LOW')
@@ -334,6 +342,7 @@
                     TRIGGER_GAP.value = data['TRIGGER_GAP'];
                     CANDLE_MOMENTUM_PC.value = data['CANDLE_MOMENTUM_PC'];
                     OHLC_MIN.value = data['OHLC_MIN'];
+                    EXTREMA_ORDER.value = data['EXTREMA_ORDER'];
                 });
 
                 btn_hold_exe.onclick = function () {
@@ -392,6 +401,11 @@
                 BTN_OHLC_MIN.onclick = function () {
 
                     configsRef.update({ OHLC_MIN: parseInt(OHLC_MIN.value) })
+                    showStatus()
+                }
+                BTN_EXTREMA_ORDER.onclick = function () {
+
+                    configsRef.update({ EXTREMA_ORDER: parseInt(EXTREMA_ORDER.value) })
                     showStatus()
                 }
                 CURRENT_MONTH_ALL.onclick = function () {

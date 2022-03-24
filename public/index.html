@@ -428,7 +428,7 @@
 
                 BTN_FREQ_CUTOFF_FACTOR.onclick = function () {
 
-                    configsRef.update({ FREQ_CUTOFF_FACTOR: parseInt(FREQ_CUTOFF_FACTOR.value) })
+                    configsRef.update({ FREQ_CUTOFF_FACTOR: parseFloat(FREQ_CUTOFF_FACTOR.value) })
                     showStatus()
                 }
                 CURRENT_MONTH_ALL.onclick = function () {

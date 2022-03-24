@@ -225,6 +225,11 @@
             <input id="EXTREMA_WINDOW" type="number">
             <button id="BTN_EXTREMA_WINDOW">update</button>
         </div>
+        <div>
+            <label>FREQ_CUTOFF_FACTOR</label>
+            <input id="FREQ_CUTOFF_FACTOR" type="number">
+            <button id="BTN_FREQ_CUTOFF_FACTOR">update</button>
+        </div>
 
     </div>
 
@@ -278,6 +283,9 @@
 
             const EXTREMA_WINDOW = document.querySelector('#EXTREMA_WINDOW')
             const BTN_EXTREMA_WINDOW = document.querySelector('#BTN_EXTREMA_WINDOW')
+
+            const FREQ_CUTOFF_FACTOR = document.querySelector('#FREQ_CUTOFF_FACTOR')
+            const BTN_FREQ_CUTOFF_FACTOR = document.querySelector('#BTN_FREQ_CUTOFF_FACTOR')
 
             const CURRENT_MONTH_ALL = document.querySelector('#CURRENT_MONTH_ALL')
             const CURRENT_MONTH_LOW = document.querySelector('#CURRENT_MONTH_LOW')
@@ -351,6 +359,7 @@
                     OHLC_MIN.value = data['OHLC_MIN'];
                     EXTREMA_ORDER.value = data['EXTREMA_ORDER'];
                     EXTREMA_WINDOW.value = data['EXTREMA_WINDOW'];
+                    FREQ_CUTOFF_FACTOR.value = data['FREQ_CUTOFF_FACTOR'];
                 });
 
                 btn_hold_exe.onclick = function () {
@@ -417,9 +426,9 @@
                     showStatus()
                 }
 
-                BTN_EXTREMA_WINDOW.onclick = function () {
+                BTN_FREQ_CUTOFF_FACTOR.onclick = function () {
 
-                    configsRef.update({ EXTREMA_WINDOW: parseInt(EXTREMA_WINDOW.value) })
+                    configsRef.update({ FREQ_CUTOFF_FACTOR: parseInt(FREQ_CUTOFF_FACTOR.value) })
                     showStatus()
                 }
                 CURRENT_MONTH_ALL.onclick = function () {

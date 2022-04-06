@@ -191,9 +191,9 @@
             <button id="BTN_STOP_PC">update</button>
         </div>
         <div>
-            <label>TRAIL_PC</label>
-            <input id="TRAIL_PC" type="number">
-            <button id="BTN_TRAIL_PC">update</button>
+            <label>TRAIL_RATIO</label>
+            <input id="TRAIL_RATIO" type="number">
+            <button id="BTN_TRAIL_RATIO">update</button>
         </div>
         <div>
             <label>TRAIL_BUFFER_PC</label>
@@ -256,8 +256,8 @@
             const STOP_PC = document.querySelector('#STOP_PC')
             const BTN_STOP_PC = document.querySelector('#BTN_STOP_PC')
 
-            const TRAIL_PC = document.querySelector('#TRAIL_PC')
-            const BTN_TRAIL_PC = document.querySelector('#BTN_TRAIL_PC')
+            const TRAIL_RATIO = document.querySelector('#TRAIL_RATIO')
+            const BTN_TRAIL_RATIO = document.querySelector('#BTN_TRAIL_RATIO')
 
             const TRAIL_BUFFER_PC = document.querySelector('#TRAIL_BUFFER_PC')
             const BTN_TRAIL_BUFFER_PC = document.querySelector('#BTN_TRAIL_BUFFER_PC')
@@ -352,7 +352,7 @@
 
                     ENTRY_STOP_PC.value = data['ENTRY_STOP_PC'];
                     STOP_PC.value = data['STOP_PC'];
-                    TRAIL_PC.value = data['TRAIL_PC'];
+                    TRAIL_RATIO.value = data['TRAIL_RATIO'];
                     TRAIL_BUFFER_PC.value = data['TRAIL_BUFFER_PC'];
                     TRIGGER_GAP.value = data['TRIGGER_GAP'];
                     CANDLE_MOMENTUM_PC.value = data['CANDLE_MOMENTUM_PC'];
@@ -393,9 +393,9 @@
                     showStatus()
                 }
 
-                BTN_TRAIL_PC.onclick = function () {
+                BTN_TRAIL_RATIO.onclick = function () {
 
-                    configsRef.update({ TRAIL_PC: parseFloat(TRAIL_PC.value) })
+                    configsRef.update({ TRAIL_RATIO: parseFloat(TRAIL_RATIO.value) })
                     showStatus()
                 }
 

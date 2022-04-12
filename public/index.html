@@ -133,6 +133,14 @@
             <label>Stop exe</label>
             <button id='hold_exe'>Loading</button>
         </div>
+        <div>
+            <label>Directional exe</label>
+            <button id='directional_exe'>Loading</button>
+        </div>
+        <div>
+            <label>Boundary exe</label>
+            <button id='boundary_exe'>Loading</button>
+        </div>
         <br>
         <div>
             <div>Strike range</div>
@@ -237,6 +245,8 @@
         document.addEventListener('DOMContentLoaded', function () {
             const loadEl = document.querySelector('#load');
             const btn_hold_exe = document.querySelector('#hold_exe')
+            const btn_directional_exe = document.querySelector('#directional_exe')
+            const btn_boundary_exe = document.querySelector('#boundary_exe')
 
             // const strike1 = document.querySelector('#strike1')
             // const strike2 = document.querySelector('#strike2')
@@ -330,6 +340,12 @@
                     hold_exe = data['HOLD_EXE'];
                     btn_hold_exe.textContent = hold_exe;
 
+                    directional_exe = data['DIRECTIONAL_EXE'];
+                    btn_directional_exe.textContent = directional_exe;
+
+                    boundary_exe = data['BOUNDARY_EXE'];
+                    btn_boundary_exe.textContent = boundary_exe;
+                    
                     CURRENT_MONTH_ALL.checked = data['STRIKES']['CURRENT_MONTH']['ALL']
                     CURRENT_MONTH_LOW.value = data['STRIKES']['CURRENT_MONTH']['LOW']
                     CURRENT_MONTH_HIGH.value = data['STRIKES']['CURRENT_MONTH']['HIGH']
@@ -364,6 +380,14 @@
 
                 btn_hold_exe.onclick = function () {
                     configsRef.update({ HOLD_EXE: !hold_exe })
+                    showStatus()
+                }
+                btn_directional_exe.onclick = function () {
+                    configsRef.update({ DIRECTIONAL_EXE: !directional_exe })
+                    showStatus()
+                }
+                btn_boundary_exe.onclick = function () {
+                    configsRef.update({ BOUNDARY_EXE: !boundary_exe })
                     showStatus()
                 }
                 // btnstrike.onclick = function () {

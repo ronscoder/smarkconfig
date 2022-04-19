@@ -184,6 +184,11 @@
             <button id="BTN_OPTION_MD_ADD">Add</button>
         </div> -->
         <div>
+            <label>BANKNIFTY_QTY</label>
+            <input id="BANKNIFTY_QTY" type="number">
+            <button id="BTN_BANKNIFTY_QTY">update</button>
+        </div>
+        <div>
             <label>OPEN_ORDER_EXPIRY_MIN</label>
             <input id="OPEN_ORDER_EXPIRY_MIN" type="number">
             <button id="BTN_OPEN_ORDER_EXPIRY_MIN">update</button>
@@ -259,6 +264,9 @@
             const el_OPTION_MD = document.querySelector('#OPTION_MD')
             const IN_OPEN_ORDER_EXPIRY_MIN = document.querySelector('#OPEN_ORDER_EXPIRY_MIN')
             const BTN_OPEN_ORDER_EXPIRY_MIN = document.querySelector('#BTN_OPEN_ORDER_EXPIRY_MIN')
+
+            const IN_BANKNIFTY_QTY = document.querySelector('#BANKNIFTY_QTY')
+            const BTN_BANKNIFTY_QTY = document.querySelector('#BTN_BANKNIFTY_QTY')
 
             const ENTRY_STOP_PC = document.querySelector('#ENTRY_STOP_PC')
             const BTN_ENTRY_STOP_PC = document.querySelector('#BTN_ENTRY_STOP_PC')
@@ -365,6 +373,11 @@
                     // option_md = data['OPTION_MD']
                     // el_OPTION_MD.textContent = option_md
                     IN_OPEN_ORDER_EXPIRY_MIN.value = data['OPEN_ORDER_EXPIRY_MIN'];
+                    if('BANKNIFTY_QTY' in data){
+                        IN_BANKNIFTY_QTY.value = data['BANKNIFTY_QTY'];
+                    }else{
+                        IN_BANKNIFTY_QTY.value = 25;
+                    }
 
                     ENTRY_STOP_PC.value = data['ENTRY_STOP_PC'];
                     STOP_PC.value = data['STOP_PC'];
@@ -403,6 +416,11 @@
                 BTN_OPEN_ORDER_EXPIRY_MIN.onclick = function () {
 
                     configsRef.update({ OPEN_ORDER_EXPIRY_MIN: parseInt(IN_OPEN_ORDER_EXPIRY_MIN.value) })
+                    showStatus()
+                }
+                BTN_BANKNIFTY_QTY.onclick = function () {
+
+                    configsRef.update({ BANKNIFTY_QTY: parseInt(IN_BANKNIFTY_QTY.value) })
                     showStatus()
                 }
                 BTN_ENTRY_STOP_PC.onclick = function () {

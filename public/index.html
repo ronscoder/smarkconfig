@@ -395,6 +395,11 @@
                     configsRef.update({ HOLD_EXE: !hold_exe })
                     showStatus()
                 }
+
+                BTN_EXTREMA_WINDOW.onclick = function () {
+                    configsRef.update({ EXTREMA_WINDOW: parseInt(EXTREMA_WINDOW.value) })
+                    showStatus()
+                }
                 btn_directional_exe.onclick = function () {
                     configsRef.update({ DIRECTIONAL_EXE: !directional_exe })
                     showStatus()

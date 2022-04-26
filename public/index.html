@@ -239,6 +239,11 @@
             <button id="BTN_EXTREMA_WINDOW">update</button>
         </div>
         <div>
+            <label>EXTREMA_GAP</label>
+            <input id="EXTREMA_GAP" type="number">
+            <button id="BTN_EXTREMA_GAP">update</button>
+        </div>
+        <div>
             <label>FREQ_CUTOFF_FACTOR</label>
             <input id="FREQ_CUTOFF_FACTOR" type="number">
             <button id="BTN_FREQ_CUTOFF_FACTOR">update</button>
@@ -301,6 +306,9 @@
 
             const EXTREMA_WINDOW = document.querySelector('#EXTREMA_WINDOW')
             const BTN_EXTREMA_WINDOW = document.querySelector('#BTN_EXTREMA_WINDOW')
+
+            const EXTREMA_GAP = document.querySelector('#EXTREMA_GAP')
+            const BTN_EXTREMA_GAP = document.querySelector('#BTN_EXTREMA_GAP')
 
             const FREQ_CUTOFF_FACTOR = document.querySelector('#FREQ_CUTOFF_FACTOR')
             const BTN_FREQ_CUTOFF_FACTOR = document.querySelector('#BTN_FREQ_CUTOFF_FACTOR')
@@ -388,6 +396,7 @@
                     OHLC_MIN.value = data['OHLC_MIN'];
                     EXTREMA_ORDER.value = data['EXTREMA_ORDER'];
                     EXTREMA_WINDOW.value = data['EXTREMA_WINDOW'];
+                    EXTREMA_GAP.value = data['EXTREMA_GAP'];
                     FREQ_CUTOFF_FACTOR.value = data['FREQ_CUTOFF_FACTOR'];
                 });
 
@@ -398,6 +407,11 @@
 
                 BTN_EXTREMA_WINDOW.onclick = function () {
                     configsRef.update({ EXTREMA_WINDOW: parseInt(EXTREMA_WINDOW.value) })
+                    showStatus()
+                }
+
+                BTN_EXTREMA_GAP.onclick = function () {
+                    configsRef.update({ EXTREMA_GAP: parseInt(EXTREMA_GAP.value) })
                     showStatus()
                 }
                 btn_directional_exe.onclick = function () {

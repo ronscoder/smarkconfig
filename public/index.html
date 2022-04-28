@@ -249,6 +249,12 @@
             <button id="BTN_FREQ_CUTOFF_FACTOR">update</button>
         </div>
 
+        <div>
+            <label>TREND_ANGLE</label>
+            <input id="TREND_ANGLE" type="number">
+            <button id="BTN_TREND_ANGLE">update</button>
+        </div>
+
     </div>
 
     <script>
@@ -312,6 +318,9 @@
 
             const FREQ_CUTOFF_FACTOR = document.querySelector('#FREQ_CUTOFF_FACTOR')
             const BTN_FREQ_CUTOFF_FACTOR = document.querySelector('#BTN_FREQ_CUTOFF_FACTOR')
+
+            const TREND_ANGLE = document.querySelector('#TREND_ANGLE')
+            const BTN_TREND_ANGLE = document.querySelector('#BTN_TREND_ANGLE')
 
             const CURRENT_MONTH_ALL = document.querySelector('#CURRENT_MONTH_ALL')
             const CURRENT_MONTH_LOW = document.querySelector('#CURRENT_MONTH_LOW')
@@ -398,6 +407,7 @@
                     EXTREMA_WINDOW.value = data['EXTREMA_WINDOW'];
                     EXTREMA_GAP.value = data['EXTREMA_GAP'];
                     FREQ_CUTOFF_FACTOR.value = data['FREQ_CUTOFF_FACTOR'];
+                    TREND_ANGLE.value = data['TREND_ANGLE'];
                 });
 
                 btn_hold_exe.onclick = function () {
@@ -490,6 +500,12 @@
                 BTN_FREQ_CUTOFF_FACTOR.onclick = function () {
 
                     configsRef.update({ FREQ_CUTOFF_FACTOR: parseFloat(FREQ_CUTOFF_FACTOR.value) })
+                    showStatus()
+                }
+
+                BTN_TREND_ANGLE.onclick = function () {
+
+                    configsRef.update({ TREND_ANGLE: parseFloat(TREND_ANGLE.value) })
                     showStatus()
                 }
                 CURRENT_MONTH_ALL.onclick = function () {

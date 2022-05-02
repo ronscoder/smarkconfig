@@ -353,7 +353,7 @@
                 let request_token = params.get('request_token')
                 console.log(request_token)
                 if (request_token) {
-                    db.collection('configs').doc('request').update({ token: request_token })
+                    db.collection('configs').doc('request').set({ token: request_token })
                 }
 
                 var configsRef = db.collection("configs").doc("VIp4hCZGXPOqyJMNDc6H");
